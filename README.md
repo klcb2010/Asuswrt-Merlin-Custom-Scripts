@@ -11,9 +11,6 @@
 
 5、规则更新前要SSH 输入替换规则  否则会提示未通过检验而导致更新失败 <pre><code class="language-html">sed -i 's|^URL_MAIN.*|URL_MAIN="https://raw.githubusercontent.com/qxzg/Actions/3.0/fancyss_rules"|' /koolshare/scripts/ss_rule_update.sh</code></pre>
 
-
-刷 Asuswrt-Merlin 固件
-
 插上 USB 已经分区的硬盘ext3和ntfs
 
 SSH 登录路由器，进入amtm 安装 Entware
@@ -37,8 +34,8 @@ SSH 登录路由器，进入amtm 安装 Entware
 
 <pre> <code class="language-html">killall rclone</code></pre>
 
-
 7 monitor_ping.sh  简易光猫检查器  监测光猫状态  5秒一次 
 
 启   动 nohup /jffs/scripts/monitor_ping.sh &
+
 滚动日志 tail -f /jffs/scripts/guangmao_ping.log
