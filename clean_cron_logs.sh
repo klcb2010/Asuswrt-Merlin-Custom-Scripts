@@ -1,10 +1,11 @@
 #!/bin/sh
 # clean_cron_logs.sh - 自动清理监控脚本日志（带 PID 检查）
-# 版本 1.5 - /tmp 和 /jffs/frpc/frpc.log 按保留天数清理
+# 版本 1.8 - 精确清理 /jffs/frpc/frpc.log
 
-SCRIPT_VERSION="1.5"
+SCRIPT_VERSION="1.8"
 TMP_LOG_DIR="/tmp"
-FRPC_LOG_DIR="/jffs/frpc"
+FRPC_LOG="/jffs/frpc/frpc.log"
+SELF_LOG="/tmp/clean_cron_logs.log"
 RETENTION_DAYS=5
 PID_FILE="/tmp/clean_cron_logs.pid"
 
@@ -29,14 +30,21 @@ log "开始清理旧日志（保留最近 $RETENTION_DAYS 天）"
 find "$TMP_LOG_DIR" -type f \( \
     -name "httpd_watch_cron.log" -o \
     -name "rclone_webdav.log" -o \
-    -name "ipv6_watchdog_cron.log" -o \
     -name "ss_rule_update.log" -o \
-    -name "ss_online_update.log" -o \
-    -name "letsencrypt.log" \
+    -name "ss_online_update.log" \
 \) -mtime +$RETENTION_DAYS -exec rm -f {} \; -exec log "已删除 {}" \;
 
-# 清理 /jffs/frpc 下日志文件（按天数）
-find "$FRPC_LOG_DIR" -type f -name "frpc.log" -mtime +$RETENTION_DAYS -exec rm -f {} \; -exec log "已删除 {}" \;
+# 精确清理 /jffs/frpc/frpc.log（按天数）
+if [ -f "$FRPC_LOG" ] && [ $(find "$FRPC_LOG" -mtime +$RETENTION_DAYS) ]; then
+    rm -f "$FRPC_LOG"
+    log "已删除 $FRPC_LOG"
+fi
+
+# 清理自身日志（按天数）
+if [ -f "$SELF_LOG" ] && [ $(find "$SELF_LOG" -mtime +$RETENTION_DAYS) ]; then
+    rm -f "$SELF_LOG"
+    log "已删除自身日志 $SELF_LOG"
+fi
 
 log "日志清理完成"
 
