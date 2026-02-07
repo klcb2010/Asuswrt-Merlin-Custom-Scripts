@@ -1,6 +1,7 @@
 
 
-260207  彻底放弃ipv6  频繁的前缀变化导致 某些设备比如 三星  苹果 设备失联   推荐ZeroTier 或Tailscale
+260207  彻底放弃[ipv6](https://github.com/klcb2010/Asuswrt-Merlin-Custom-Scripts/blob/ipv6/ipv6_watchdog.sh)
+ 频繁的前缀变化导致 某些设备比如 三星  苹果 设备失联   推荐ZeroTier 或Tailscale
 开启华硕DDNS一定要光猫关闭防火墙  否则入站必然受阻   因为是动态ipv6 
 
  光猫改桥接导致IP变化更频繁  光猫网络设定中RA下方也需要勾选  让路由器更好的获取地址前缀
