@@ -1,11 +1,6 @@
-
-
 260207  彻底放弃[ipv6](https://github.com/klcb2010/Asuswrt-Merlin-Custom-Scripts/tree/ipv6)
 
-
-
 1、SS规则更新在路由软件中心管理界面先打开更新 再禁用定时 后面由定时任务接管
-
 
 2、设定开机自动更新 定时任务 在jffs/scripts/post-mount里添加<pre><code class="language-html">#!/bin/sh
 /jffs/scripts/set_crontab.sh &</code></pre>
@@ -17,15 +12,9 @@
 5、规则更新前要SSH 输入替换规则  否则会提示未通过检验而导致更新失败 <pre><code class="language-html">sed -i 's|^URL_MAIN.*|URL_MAIN="https://raw.githubusercontent.com/qxzg/Actions/3.0/fancyss_rules"|' /koolshare/scripts/ss_rule_update.sh</code></pre>
 
 
-6 开启 webdav  用于向路由硬盘备份文档  同样在post-mount里调用   <pre> <code class="language-html">/jffs/scripts/rclone_webdav.sh &</code></pre>
-
-前提 
-
 刷 Asuswrt-Merlin 固件
 
 插上 USB 已经分区的硬盘ext3和ntfs
-
-
 
 SSH 登录路由器，进入amtm 安装 Entware
 
@@ -37,7 +26,6 @@ SSH 登录路由器，进入amtm 安装 Entware
 <pre> <code class="language-html">ls /tmp/mnt/</code></pre>
 <pre> <code class="language-html">df -h | grep mnt</code></pre>
 
-
 创建独立自启脚本运行
 <pre> <code class="language-html">/jffs/scripts/rclone_webdav.sh</code></pre>
 重启后执行下列命令 看到 rclone 进程和日志
@@ -45,16 +33,12 @@ SSH 登录路由器，进入amtm 安装 Entware
 
 <pre> <code class="language-html">cat /tmp/rclone.log</code></pre> 
 
-
-
 停止
 
 <pre> <code class="language-html">killall rclone</code></pre>
 
 
-
-
-9 monitor_ping.sh  简易光猫检查器  监测光猫状态  5秒一次 
+7 monitor_ping.sh  简易光猫检查器  监测光猫状态  5秒一次 
 
 启   动 nohup /jffs/scripts/monitor_ping.sh &
 滚动日志 tail -f /jffs/scripts/guangmao_ping.log
