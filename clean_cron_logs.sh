@@ -1,9 +1,11 @@
 #!/bin/sh
 # clean_cron_logs.sh - 自动清理监控脚本日志（带 PID 检查）
+# 版本 1.5 - /tmp 和 /jffs/frpc/frpc.log 按保留天数清理
 
-SCRIPT_VERSION="1.3"
-LOG_DIR="/tmp"
-RETENTION_DAYS=7
+SCRIPT_VERSION="1.5"
+TMP_LOG_DIR="/tmp"
+FRPC_LOG_DIR="/jffs/frpc"
+RETENTION_DAYS=5
 PID_FILE="/tmp/clean_cron_logs.pid"
 
 log() {
@@ -23,8 +25,8 @@ echo $$ > "$PID_FILE"
 
 log "开始清理旧日志（保留最近 $RETENTION_DAYS 天）"
 
-# 查找并删除超过 RETENTION_DAYS 的日志文件
-find "$LOG_DIR" -type f \( \
+# 清理 /tmp 下指定日志文件
+find "$TMP_LOG_DIR" -type f \( \
     -name "httpd_watch_cron.log" -o \
     -name "rclone_webdav.log" -o \
     -name "ipv6_watchdog_cron.log" -o \
@@ -32,6 +34,9 @@ find "$LOG_DIR" -type f \( \
     -name "ss_online_update.log" -o \
     -name "letsencrypt.log" \
 \) -mtime +$RETENTION_DAYS -exec rm -f {} \; -exec log "已删除 {}" \;
+
+# 清理 /jffs/frpc 下日志文件（按天数）
+find "$FRPC_LOG_DIR" -type f -name "frpc.log" -mtime +$RETENTION_DAYS -exec rm -f {} \; -exec log "已删除 {}" \;
 
 log "日志清理完成"
 
