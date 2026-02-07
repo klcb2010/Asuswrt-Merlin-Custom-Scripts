@@ -60,4 +60,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/klcb2010/Asuswrt-Merlin-Custom-Scripts.git
-          git push origin main --force
+          git push origin ipv6 --force
