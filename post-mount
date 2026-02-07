@@ -3,11 +3,3 @@
 
 . /jffs/addons/amtm/mount-entware.mod
 swapon /tmp/mnt/SF/swapfile
-
-
-sleep 5
-
-nohup /jffs/scripts/set_crontab.sh >/tmp/set_crontab.log 2>&1 &
-nohup /jffs/scripts/set_territory.sh >/tmp/set_territory.log 2>&1 &
-nohup /jffs/scripts/rclone_webdav.sh >/tmp/rclone_webdav.log 2>&1 &
-nohup /jffs/scripts/httpd_watch.sh >/tmp/ssh_key.log 2>&1 &
