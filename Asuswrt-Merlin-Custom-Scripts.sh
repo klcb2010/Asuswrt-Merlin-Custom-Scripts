@@ -47,7 +47,7 @@ execute_script() {
 }
 
 # 文件列表（用空格分隔，sh 兼容  开启ipv6再添加 httpd_watch.sh ipv6_watchdog.sh
-FILES="ss_rule_update.sh ss_online_update.sh cron set_territory.sh rclone_webdav.sh  ssh_key.sh  clean_cron_logs.sh"
+FILES="ss_rule_update.sh ss_online_update.sh cron set_territory.sh rclone_webdav.sh  frpc_start.sh  clean_cron_logs.sh"
 
 # 下载并赋权限
 for file in $FILES; do
