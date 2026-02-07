@@ -1,5 +1,0 @@
-#!/bin/sh
-/koolshare/bin/ks-mount-start.sh start $1
-
-. /jffs/addons/amtm/mount-entware.mod
-swapon /tmp/mnt/SF/swapfile
