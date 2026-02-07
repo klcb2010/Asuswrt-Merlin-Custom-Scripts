@@ -1,6 +1,7 @@
 
 
 260207  彻底放弃[ipv6](https://github.com/klcb2010/Asuswrt-Merlin-Custom-Scripts/blob/ipv6/ipv6_watchdog.sh)
+
  频繁的前缀变化导致 某些设备比如 三星  苹果 设备失联   推荐ZeroTier 或Tailscale
 开启华硕DDNS一定要光猫关闭防火墙  否则入站必然受阻   因为是动态ipv6 
 
