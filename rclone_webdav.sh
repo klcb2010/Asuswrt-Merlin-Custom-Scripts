@@ -1,6 +1,9 @@
 #!/bin/sh
 
-sleep 30
+
+# 创建日志和挂载目录
+mkdir -p /tmp
+mkdir -p /tmp/mnt/SD
 
 LOG_FILE="/tmp/rclone.log"
 
