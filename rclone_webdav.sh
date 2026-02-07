@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sleep 30
+sleep 5
 
 LOG_FILE="/tmp/rclone.log"
 
