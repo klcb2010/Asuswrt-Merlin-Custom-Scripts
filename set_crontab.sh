@@ -6,9 +6,6 @@ USER="klcb2010"
 # 日志文件路径
 LOG_FILE="/jffs/scripts/set_crontab.log"
 
-# 延迟启动时间（秒），可以根据需要调整
-DELAY_START=30
-
 # 获取当前时间函数，格式 2026-01-11 11:22:33
 now() {
     date +"%Y-%m-%d %H:%M:%S"
