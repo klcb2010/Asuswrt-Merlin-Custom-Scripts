@@ -1,0 +1,16 @@
+#!/bin/sh
+# 1. 执行 koolshare 插件引导
+/koolshare/bin/ks-nat-start.sh start_nat
+
+# 2. 强制拉起定时守护
+cru a frpc_guard "*/5 * * * * [ -z \"\$(pidof frpc)\" ] && /bin/sh /jffs/scripts/frpc_start.sh"
+cru a rclone_guard "*/5 * * * * [ -z \"\$(pidof rclone)\" ] && /bin/sh /jffs/scripts/rclone_webdav.sh"
+
+# 其他原有日志清理与更新任务
+cru a "clean_logs" "*/30 * * * * /jffs/scripts/clean_cron_logs.sh > /tmp/clean_cron_logs.log 2>&1"
+cru a "ss_rule_update" "0 6 * * * /jffs/scripts/ss_rule_update.sh >> /tmp/ss_rule_update.log 2>&1"
+cru a "ss_online_update" "0 17 * * 6 /jffs/scripts/ss_online_update.sh fancyss 3 >> /tmp/ss_online_update.log 2>&1"
+
+# 3. 立即尝试拉起一次 (后台运行)
+/bin/sh /jffs/scripts/frpc_start.sh &
+/bin/sh /jffs/scripts/rclone_webdav.sh &

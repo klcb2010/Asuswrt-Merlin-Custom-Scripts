@@ -1,0 +1,5 @@
+*/30 * * * * pidof rclone >/dev/null || (killall -9 rclone 2>/dev/null; /jffs/scripts/rclone_webdav.sh >> /tmp/rclone_webdav.log 2>&1 &) #rclone_guard#
+0 6 * * * /jffs/scripts/ss_rule_update.sh >> /tmp/ss_rule_update.log 2>&1 #ss_rule_update#
+0 17 * * 6 /jffs/scripts/ss_online_update.sh fancyss 3 >> /tmp/ss_online_update.log 2>&1 #ss_online_update#
+0 1 * * * /jffs/scripts/clean_cron_logs.sh > /tmp/clean_cron_logs.log 2>&1 #clean_cron_logs#
+*/30 * * * * pidof frpc >/dev/null || (killall -9 frpc 2>/dev/null; /jffs/scripts/frpc_start.sh >> /tmp/frpc_start.log 2>&1 &) #frpc_guard#
