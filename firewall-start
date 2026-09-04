@@ -1,0 +1,85 @@
+#!/bin/sh
+
+# SSH_helper firewall rules
+
+PORTS="8180 8181 8182 12525 9998 9999"
+
+for port in $PORTS
+do
+
+    # IPv4
+    iptables -C INPUT -p tcp --dport $port -j ACCEPT 2>/dev/null || \
+    iptables -I INPUT -p tcp --dport $port -j ACCEPT
+
+
+    # IPv6
+    if [ -x /usr/sbin/ip6tables ]; then
+
+        /usr/sbin/ip6tables -C INPUT -p tcp --dport $port -j ACCEPT 2>/dev/null || \
+        /usr/sbin/ip6tables -I INPUT -p tcp --dport $port -j ACCEPT
+
+    fi
+
+done
+
+exit 0
+
+# SSH_helper port 8180
+
+iptables -C INPUT -p tcp --dport 8180 -j ACCEPT 2>/dev/null || iptables -I INPUT -p tcp --dport 8180 -j ACCEPT
+
+
+if command -v ip6tables >/dev/null 2>&1; then
+
+ip6tables -C INPUT -p tcp --dport 8180 -j ACCEPT 2>/dev/null || ip6tables -I INPUT -p tcp --dport 8180 -j ACCEPT
+
+fi
+
+
+# SSH_helper port 8181
+
+iptables -C INPUT -p tcp --dport 8181 -j ACCEPT 2>/dev/null || iptables -I INPUT -p tcp --dport 8181 -j ACCEPT
+
+
+if command -v ip6tables >/dev/null 2>&1; then
+
+ip6tables -C INPUT -p tcp --dport 8181 -j ACCEPT 2>/dev/null || ip6tables -I INPUT -p tcp --dport 8181 -j ACCEPT
+
+fi
+
+
+# SSH_helper port 2525
+
+iptables -C INPUT -p tcp --dport 2525 -j ACCEPT 2>/dev/null || iptables -I INPUT -p tcp --dport 2525 -j ACCEPT
+
+
+if command -v ip6tables >/dev/null 2>&1; then
+
+ip6tables -C INPUT -p tcp --dport 2525 -j ACCEPT 2>/dev/null || ip6tables -I INPUT -p tcp --dport 2525 -j ACCEPT
+
+fi
+
+
+# SSH_helper port 9998
+
+iptables -C INPUT -p tcp --dport 9998 -j ACCEPT 2>/dev/null || iptables -I INPUT -p tcp --dport 9998 -j ACCEPT
+
+
+if command -v ip6tables >/dev/null 2>&1; then
+
+ip6tables -C INPUT -p tcp --dport 9998 -j ACCEPT 2>/dev/null || ip6tables -I INPUT -p tcp --dport 9998 -j ACCEPT
+
+fi
+
+
+# SSH_helper port 9999
+
+iptables -C INPUT -p tcp --dport 9999 -j ACCEPT 2>/dev/null || iptables -I INPUT -p tcp --dport 9999 -j ACCEPT
+
+
+if command -v ip6tables >/dev/null 2>&1; then
+
+ip6tables -C INPUT -p tcp --dport 9999 -j ACCEPT 2>/dev/null || ip6tables -I INPUT -p tcp --dport 9999 -j ACCEPT
+
+fi
+
